@@ -1,0 +1,14 @@
+- Le rotte sono definite nel file app-routing-module.ts, viene importato ed esportato l' oggetto RouterModule passandogli in
+  input l' array con la definizione delle rotte con definizione: {pat: 'percorso', component: nome_componente}; possiamo inoltre
+  definire un redirect con seguente definizione: {path: '', redirectTo: 'percorso'}.
+  Nel path possiamo specificare se il percorso accetta parametri di rotta dinamici: path: 'prodotto/:id', specificando poi il
+  parametro in [routerLink]="['/prodotto/2']. A questo punto dobbiamo iniettare nel costruttore del componente in cui prendere i
+  parametri di rotta, l' observable ActivatedRoute e sottoscrivendoci potremo ottenere i parametri.
+
+- Le rotte vengono definite nei componenti grazie a <router-outlet></router-outlet>, un placeholder che indica dove devono
+  essere reinderizzati i vari componenti definiti nelle rotte. Quindi i componenti, quando chiamati dalle rotte, prenderanno il posto di
+  <router-outlet></router-outlet>.
+
+- Per navigare tra le rotte dobbiamo aggiungerle nei vari tag <a></a> relativi specificando l' attributo [routerLink]="['/rotta'], al
+  quale possiamo anche aggiungere anche dei parametri. Per rispettare l' ordine semantico andiamo ad aggiungere ad href la
+  seguente istruzione: javascript:void(0).

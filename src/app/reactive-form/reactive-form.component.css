@@ -1,0 +1,41 @@
+h2 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.field{
+  margin-bottom: 15px;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.input {
+  /* margin: 15px 0; */
+  margin-top: 15px;
+  height: 40px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.button {
+  background-color: #333;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+.error{
+  color: crimson;
+  font-size: 13px;
+  margin-top: 5px;
+}
+.testo-colorato{
+  margin-top: 40px;
+}
+.testo-colorato>p{
+  margin-top: 15px;
+}

@@ -1,0 +1,26 @@
+<h2>TEMPLATE FORM</h2>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <div class="field">
+    <label for="username" class="label">Username</label>
+    <div>
+      <input type="text" class="input" id="username" name="username" placeholder="Username" ngModel>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="email" class="label">Email</label>
+    <div>
+      <input type="email" class="input" id="email" name="email" placeholder="Email@example.it" ngModel>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="password" class="label">Password</label>
+    <div>
+      <input type="password" class="input" id="password" name="password" placeholder="Password" ngModel>
+    </div>
+  </div>
+
+  <button class="button" type="submit">SUBMIT</button>
+</form>

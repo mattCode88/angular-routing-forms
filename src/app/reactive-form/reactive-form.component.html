@@ -1,0 +1,41 @@
+<h2>REACTIVE FORM</h2>
+<form [formGroup]="mioForm" (ngSubmit)="onSubmit(mioForm.value)">
+  <p class="error" *ngIf="!mioForm.valid">Form non ancora valido.</p>
+  <div class="field">
+    <label for="username" class="label">Username</label>
+    <div>
+      <input type="text" class="input" id="username"  placeholder="Username" formControlName="username">
+    </div>
+    <p class="error" *ngIf="mioForm.controls['username'].hasError('required')">*Il campo è richiesto.</p>
+    <p class="error" *ngIf="mioForm.controls['username'].hasError('minlength')">*Il campo deve avere almeno 4 caratteri.</p>
+  </div>
+
+  <div class="field">
+    <label for="email" class="label">Email</label>
+    <div>
+      <input type="email" class="input" id="email" placeholder="Email@example.it" formControlName="email">
+    </div>
+    <p class="error" *ngIf="mioForm.controls['email'].hasError('required')">*Il campo è richiesto.</p>
+    <p class="error" *ngIf="mioForm.controls['email'].hasError('invalidMail')">*La mail deve contenere la @.</p>
+  </div>
+
+  <div class="field">
+    <label for="password" class="label">Password</label>
+    <div>
+      <input type="password" class="input" id="password" placeholder="Password" formControlName="password">
+    </div>
+    <p class="error" *ngIf="mioForm.controls['password'].hasError('required')">*Il campo è richiesto.</p>
+  </div>
+
+  <button class="button" type="submit">SUBMIT</button>
+</form>
+
+<div class="testo-colorato">
+  <select (change)="changeColor()" [formControl]="selectedColor">
+    <option value="">Black</option>
+    <option value="1">Red</option>
+    <option value="2">Green</option>
+    <option value="3">Purple</option>
+  </select>
+  <p [style.color]="color">Scegli un colore ed io mi colorerò del colore che sceglierai!</p>
+</div>

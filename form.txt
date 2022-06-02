@@ -1,0 +1,49 @@
+- I form possono essere creati e gestiti con 2 metodi diversi:
+  1)  Template form
+  2)  Reactive form
+
+- In app-module.ts si importano i moduli relativi al form che si intende utilizzare: FormsModule(template) ReactiveFormsModule(reactive).
+- I concetti di base dei form angular sono formGroup e formControl, il secondo rappresenta il singolo input mentre il primo è un insieme di
+  formGroup
+
+1)  Template form
+
+- Nel tag form, si crea una variabile locale(f per convenzione) alla quale si associa la direttiva ngFrom(formGroup) con seguente sintassi: #f="ngForm";
+  La variabile #f rappresenterà il nostro form e potremo passarla in input all' evento di submit: (ngSubmit)="onSubmit(f.value), f.value sarà
+  un oggetto con diverse proprietà(input) con coppia chiave valore(ngModel).
+
+- Nei vari input si metterà la direttiva ngModel che andrà ad assumere la chiave riportata in name e il valore di value dell' input.
+  Gli ngModel rappresentano i vari formControl e diventeranno le coppie chiave/valore che compongono a f.value
+
+2)  Reactive Form
+
+- Mentre i template form sono costruiti a partire appunto dal template, i reactive form vengono creati nel .ts tramite FormBuilders e successivamente
+  associati al template.
+  FormBuilder deve essere chiamato nel costruttore come dependency injection. Viene poi definita una variabile di tipo FormGroup che rappresenterà il
+  formGroup(form) e verrà istanziata nel costruttre tramite il metodo group() chiamato su FormBuilder, nel quale si definirà un oggetto contenente
+  le coppie chiave valore degli input, in cui il valore sarà definito da un array con primo valore una stringa(valore iniziale input) seguita dai
+  validatori costruiti sulla classe Validators. Nel caso volessimo aggiungere più di un validatore, utilizziamo il metodo compose() applicato
+  alla classe Validators al quale passiamo un array con i vari validatori.
+
+- Ora nel form html dobbiamo associare la variabile di tipo FormGroup definita nel .ts con sintassi: [formGroup]="mioForm" e associare agli input i vari
+  FormControl con valore della proprietà definita nel .ts(a differenza del template form non avremo più bisogno del name); sintassi: formControlName="username".
+  L' evento di submit prenderà ora in pasto la variabile mioForm.value.
+
+- Al trigger dell' evento di submit possiamo controllare la validità del form, sulla base dei Validators impostati, tramite la roprità valid,
+  che ritornerà un booleano in base al soddisfacimento dei requisiti di validazione. Se volessimo accedere ad un determinato valore del form
+  utilizziamo la proprietà controls con sintassi: mioForm.controls['username'].value.
+
+- Lato template possiamo visualizzare un messaggio di errore tramite un ngIf, fino a quando il validatore non ritorna errori e possiamo farlo applicando
+  ad ogni form.controls il metodo hasError('errrore'). Possiamo applicare un errore generico a tutto il form controllando tramite la proprietà valid
+  applicata sul form che visualizzerà un messaggio fino a quando il form sarà valido.
+
+- Possiamo definire dei validatori personalizzati come funzioni che ritornano una funzione di tipo ValidatorFn in caso di fail, o null.
+  All' interno della funzione dobbiamo quindi ritornare una funzione anonima(ValidatorFn) alla quale daremo in pasto una variabile di tipo AbstractControl che
+  assumerà il valore del control al quale assoceremo il validatore. A questo punto, se i controlli sul valore del control non andranno a buon fine
+  restituiamo un oggetto con una proprietà da noi impostata con valore true, altrimenti, se il controllo è stato superato, restituiamo null.
+  Aggiungiamo quindi il nostro validatore come funzione nel campo che vogliamo validare.
+
+- Nel caso in cui stessimo trattando dei formControl esterni ad un formGroup possiamo definirli come tali nel template non con l' attributo formControlName
+  ma con sintassi: [formControl]="selectedColor", la variabile selectedColor associata al formControl andrà poi inizializzata nel .ts come nuova
+  istanza di FormControl, con sintassi: selectedColor: FormControl = new FormControl(); da qui possiamo associarla allo style di un elemento e
+  modificarla a piacere.
